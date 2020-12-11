@@ -8,7 +8,7 @@
 				},
 				{"copyfile": {
 						"from": "hello.txt",
-						"to": "/home/astra/Desktops/Desktop1"	
+						"to": "hello2.txt"	
 					}}
 			]},
 	{"sendTo":["all"]}
