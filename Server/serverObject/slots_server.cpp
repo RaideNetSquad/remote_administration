@@ -7,6 +7,7 @@ void Server::getJson(int socketDescriptor, Packet pack)
     QString nameCommand = pack.getNameCommand();
     QString textCommand = pack.getTextCommand();
     QString command = pack.getJsonCommand();
+
     QJsonDocument doc = QJsonDocument::fromJson(command.toUtf8());
     //массив команд и получателей
     QJsonArray arrInstructions = doc.array();
@@ -56,6 +57,13 @@ void Server::getJson(int socketDescriptor, Packet pack)
         errorFoundHost("jsonsender" + nameHost, socketDescriptor);
         return;
     }
+
+    //хостам отправляю только команды
+    QJsonDocument arr;
+    arr.setArray(arrCommands);
+    QString arrStr = arr.toJson();
+    pack.setJsonCommand(arrStr);
+
     if(!all.isNull())
     {
         QMap<QString,int>::Iterator it = hosts.begin();

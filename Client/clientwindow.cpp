@@ -51,9 +51,7 @@ void ClientWindow::parser_Commands(QString &command)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(command.toUtf8());
     if(jsonDoc.isArray())
     {
-        QJsonArray jsonArr = jsonDoc.array();
-        QJsonObject jsonObj = jsonArr[0].toObject();
-        QJsonArray arrCommands = jsonObj.take("commands").toArray();
+        QJsonArray arrCommands = jsonDoc.array();
         for(int i = 0; i < arrCommands.size(); ++i)
         {
             QJsonObject commandObj = arrCommands[i].toObject();

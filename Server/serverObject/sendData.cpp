@@ -6,6 +6,7 @@ void Server::SendDataPack(Packet pack, int socketDescriptor)
     QDateTime time = QDateTime::currentDateTime();
     pack.setDateAndTime(time);
 
+    //qDebug() << "JSON COMMAND" << pack.getJsonCommand();
 
     QTcpSocket* send = new QTcpSocket();
     send->setSocketDescriptor(socketDescriptor);
