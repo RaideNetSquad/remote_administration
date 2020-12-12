@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.13.2, 2020-12-10T19:51:01. -->
+<!-- Written by QtCreator 4.13.2, 2020-12-12T07:07:14. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -323,8 +323,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/netkiller/Desktop/clientsServThreaded/JsonConf/JsonConf.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/netkiller/Desktop/clientsServThreaded/JsonConf/JsonConf.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">JsonConf2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/netkiller/Desktop/remote_admin/JsonConf/JsonConf.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/netkiller/Desktop/remote_admin/JsonConf/JsonConf.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

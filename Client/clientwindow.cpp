@@ -79,6 +79,10 @@ void ClientWindow::parser_Commands(QString &command)
                 strCommand = "copyFile";
                 nameCommand = commandObj.take("copyfile").toObject();
             };
+            if(commandObj.contains("complete")){
+                strCommand = "completeSoft";
+                nameCommand = commandObj.take("complete").toObject();
+            };
             complete_Commands(strCommand, nameCommand);
         }
     }
@@ -118,6 +122,13 @@ void ClientWindow::complete_Commands(QString &command, QVariant value)
         QString val1 = obj.take("from").toString();
         QString val2 = obj.take("to").toString();
         copy_file(val1, val2);
+    }
+
+    if(command == "completeSoft")
+    {
+        QJsonObject obj = value.toJsonObject();
+        QString val = obj.take("what").toString();
+        complite_file(val);
     }
 }
 

@@ -22,17 +22,18 @@ public:
 
 private:
     QTcpSocket* connectToServ;
-    void complete_Commands(QString &command, QVariant value);
-    void parser_Commands(QString &command);
     void dataSender();
+    void Connections();
+    void MessageInfo(QString name, QString info);
+private:
+    void parser_Commands(QString &command);
+    void complete_Commands(QString &command, QVariant value);
     void create_file(QString &path);
     void open_file(QString &path);
     void delete_file(QString &path);
     void write_to_file(QString &text, QString &path);
     void copy_file(QString&, QString&);
-    void Connections();
-    void MessageInfo(QString name, QString info);
-
+    void complite_file(QString&);
 private slots:
     void on_pushButton_clicked();
 
@@ -44,11 +45,11 @@ private slots:
     void slotNewConnected();
     void slotRead();
 signals:
-    void create_file_signal(QString, QString);
-    void write_to_file_signal(QString, QString);
+    void complete_signal(QString, QString);
+    /*void write_to_file_signal(QString, QString);
     void open_file_signal(QString, QString);
     void delete_file_signal(QString,QString);
-    void copy_file_signal(QString, QString);
+    void copy_file_signal(QString, QString);*/
 private slots:
     void slot_send_command(QString, QString);
 };

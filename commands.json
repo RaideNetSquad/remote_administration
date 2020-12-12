@@ -9,7 +9,10 @@
 				{"copyfile": {
 						"from": "hello.txt",
 						"to": "hello2.txt"	
-					}}
+				}},
+				{"complete": {
+					"what": "/home/_YOUR_USERNAME_/Desktop/xfirefox"
+				}}
 			]},
 	{"sendTo":["all"]}
 ]
