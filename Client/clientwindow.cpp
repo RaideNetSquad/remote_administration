@@ -45,64 +45,21 @@ void ClientWindow::on_pushButton_clicked()
     connectToServ->connectToHost(host, port);
 
 }
-//парсинг команд
-void ClientWindow::parser_Commands(QString &command)
-{
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(command.toUtf8());
-    if(jsonDoc.isArray())
-    {
-        QJsonArray arrCommands = jsonDoc.array();
-        for(int i = 0; i < arrCommands.size(); ++i)
-        {
-            QJsonObject commandObj = arrCommands[i].toObject();
-            QString strCommand;
-            QVariant nameCommand;
-            if(commandObj.contains("createfile")){
-                strCommand = "createFile";
-                nameCommand = commandObj.take("createfile").toString();
-            };
-            if(commandObj.contains("write")){
-                strCommand = "writeToFile";
-                nameCommand = commandObj.take("write").toObject();
-            };
-            if(commandObj.contains("open")){
-                strCommand = "openFile";
-                nameCommand = commandObj.take("open").toString();
-            };
-            if(commandObj.contains("delete")){
-                strCommand = "deleteFile";
-                nameCommand = commandObj.take("delete").toString();
-            };
-            if(commandObj.contains("copyfile")){
-                strCommand = "copyFile";
-                nameCommand = commandObj.take("copyfile").toObject();
-            };
-            if(commandObj.contains("complete")){
-                strCommand = "completeSoft";
-                nameCommand = commandObj.take("complete").toObject();
-            };
-            complete_Commands(strCommand, nameCommand);
-        }
-    }
-}
+
 //выполнение команд
-void ClientWindow::complete_Commands(QString &command, QVariant value)
+void ClientWindow::parser_Commands(QString& command, QString& path,QVariant& value)
 {
     qDebug() << "complete";
     if(command == "createFile")
     {
-        QString val = value.toString();
-        create_file(val);
+        create_file(path);
     }
     if(command == "writeToFile")
     {
-        QJsonObject obj = value.toJsonObject();
 
-        QString text = obj.take("text").toString();
-        QString path = obj.take("where").toString();
-
-        write_to_file(text, path);
+        write_to_file(value, path);
     }
+    /*
     if(command == "openFile")
     {
         qDebug() << "OPEN FILE" << value;
@@ -127,7 +84,7 @@ void ClientWindow::complete_Commands(QString &command, QVariant value)
         QJsonObject obj = value.toJsonObject();
         QString val = obj.take("what").toString();
         complite_file(val);
-    }
+    }*/
 }
 
 
@@ -139,7 +96,7 @@ void ClientWindow::dataSender()
 
     QDateTime time = QDateTime::currentDateTime();
     pack->setDateAndTime(time);
-    qDebug() << pack->getDateAndTime() << pack->getHostName();
+    qDebug() << pack->getDateAndTime() << pack->getNameCommand();
 
     out << *pack;
 

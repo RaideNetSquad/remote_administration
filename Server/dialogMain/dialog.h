@@ -23,6 +23,7 @@ protected:
     QHostAddress host;
     int port;
     int threadsMy;
+    void connects_dialog();
     bool getHost();
     void checkErrorGettingHost();
 private slots:

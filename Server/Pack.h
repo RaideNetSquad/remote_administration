@@ -3,6 +3,7 @@
 #include <QDataStream>
 #include <QString>
 #include <QDateTime>
+#include <QVariant>
 class Packet
 {
 public:
@@ -13,10 +14,12 @@ public:
 private:
     QString hostName;
     QDateTime dateAndTime;
+    QString path;
     QString nameCommand;
     QString textCommand;
-    QString jsonCommand;
+    QVariant command;
     QString error;
+    QByteArray bytes;
 public:
     QString getHostName()
     {
@@ -26,6 +29,10 @@ public:
     {
         return this->dateAndTime;
     };
+    QString getPath()
+    {
+        return this->path;
+    }
     QString getNameCommand()
     {
         return this->nameCommand;
@@ -34,40 +41,51 @@ public:
     {
         return this->textCommand;
     };
-    QString getJsonCommand()
+    QVariant getCommand()
     {
-        return this->jsonCommand;
+        return this->command;
     };
     QString getError()
     {
         return this->error;
     };
+    QByteArray getBytes()
+    {
+        return this->bytes;
+    }
 
-    QString setHostName(QString &name)
+    void setHostName(QString &name)
     {
-        return this->hostName = name;
+        this->hostName = name;
     };
-    QDateTime setDateAndTime(QDateTime &dat)
+    void setDateAndTime(QDateTime &dat)
     {
-        return this->dateAndTime = dat;
+        this->dateAndTime = dat;
     };
-    QString setNameCommand(QString &name)
+    void setPath(QString &path)
     {
-        return this->nameCommand = name;
-    };
-    QString setTextCommand(QString &name)
+        this->path = path;
+    }
+    void setNameCommand(QString &name)
     {
-        return this->textCommand = name;
+        this->nameCommand = name;
     };
-    QString setJsonCommand(QString &name)
+    void setTextCommand(QString &name)
     {
-        return this->jsonCommand = name;
+        this->textCommand = name;
     };
-    QString setError(QString &name)
+    void setCommand(QVariant &name)
     {
-        return this->error = name;
+        this->command = name;
     };
-
+    void setError(QString &name)
+    {
+        this->error = name;
+    };
+    void setBytes(QByteArray &arr)
+    {
+        this->bytes = arr;
+    }
 public:
     friend QDataStream &operator <<(QDataStream &stream,const Packet &net);
     friend QDataStream &operator >>(QDataStream &stream, Packet &net);
@@ -76,20 +94,24 @@ inline QDataStream &operator>>(QDataStream &stream, Packet &pack)
 {
     stream >> pack.hostName;
     stream >> pack.dateAndTime;
+    stream >> pack.path;
     stream >> pack.nameCommand;
     stream >> pack.textCommand;
-    stream >> pack.jsonCommand;
+    stream >> pack.command;
     stream >> pack.error;
+    stream >> pack.bytes;
     return stream;
 }
 inline QDataStream &operator<<(QDataStream &stream, const Packet &pack)
 {
     stream << pack.hostName;
     stream << pack.dateAndTime;
+    stream << pack.path;
     stream << pack.nameCommand;
     stream << pack.textCommand;
-    stream << pack.jsonCommand;
+    stream << pack.command;
     stream << pack.error;
+    stream << pack.bytes;
     return stream;
 }
 

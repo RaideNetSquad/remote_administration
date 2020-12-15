@@ -29,8 +29,14 @@ void ClientWindow::slotRead()
 
     if (!in.commitTransaction())
           return;
-    QString json =pack.getJsonCommand();
-    parser_Commands(json);
+    QVariant command =pack.getCommand();
+    QString name = pack.getNameCommand();
+    QString text = pack.getTextCommand();
+    qDebug() << pack.getBytes();
+    //parser_Commands(name,text,command);
+
+
+
 }
 
 void ClientWindow::slot_send_command(QString nameCommand, QString textCommand){

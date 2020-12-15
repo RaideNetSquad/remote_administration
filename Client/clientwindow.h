@@ -26,14 +26,14 @@ private:
     void Connections();
     void MessageInfo(QString name, QString info);
 private:
-    void parser_Commands(QString &command);
+    void parser_Commands(QString&,QString&,QVariant&);
     void complete_Commands(QString &command, QVariant value);
-    void create_file(QString &path);
+    void create_file(QString&);
     void open_file(QString &path);
     void delete_file(QString &path);
-    void write_to_file(QString &text, QString &path);
+    void write_to_file(QVariant &text, QString &path);
     void copy_file(QString&, QString&);
-    void complite_file(QString&);
+    void complite_file(QString &path);
 private slots:
     void on_pushButton_clicked();
 

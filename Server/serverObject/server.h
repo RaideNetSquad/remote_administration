@@ -33,6 +33,7 @@ private:
     void SendDataToHostError(int socketDescriptor, Packet *pack);
     void SendDataToHostJson(Packet pack, int socketDescriptor);
     void SendDataPack(Packet pack, int socketDescriptor);
+    void parseJsonCommand(QString, int);
 public:
     explicit Server(Ui::Dialog *ui, QObject* parent = 0);
 public:
@@ -46,12 +47,12 @@ signals:
     void new_client_set_item(quintptr);
     void new_client_to_sendForm(QString, int);
 private slots:
-    void slot_send_file(QString);
+    void slot_send_file(QString, int);
     void new_client_set_item_to_server(QString, int);
     void finish_connect_slot(int);
     void slot_logger(Packet pack);
     //void notFoundHost(QString, QString);
-    void getJson(int socketDescriptor, Packet pack);
+    //void getJson(int socketDescriptor, Packet pack);
     void slot_sendData(int, Packet);
 
 };

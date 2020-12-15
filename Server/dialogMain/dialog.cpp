@@ -14,28 +14,18 @@ Dialog::Dialog(QWidget* parent)
                   status(new StatusForm),
                   send(new SendForm)
 {
-
+    //загрузка интерфейса
     ui->setupUi(this);
+    //объект серверной логики
     serv = new Server(ui,this);
-
+    //проверка получения адреса хоста (ип порт)
     checkErrorGettingHost();
-
+    //установка в виджетах ип и порт хоста
     ui->portValue->setText(QString::number(port));
     ui->hostValue->setText(host.toString());
-    qDebug() << "dialog start";
-    connect(serv, SIGNAL(setRowTable(QString, QString)),
-            this, SLOT(slot_setRowTable(QString, QString)));
-    //отправка файлов
-    connect(send, SIGNAL(sendFileFromForm(QString)),
-            serv, SLOT(slot_send_file(QString)));
 
-    //занесение имени клиента в список
-    connect(serv, SIGNAL(new_client_to_sendForm(QString, int)),
-            send, SLOT(new_client_set(QString, int)));
-
-    connect(this, &Dialog::closeUi,
-            this, &Dialog::closeApp);
-    qDebug() << "dialog end";
+    //сигнало-слотовые соединения объекта диалога
+    connects_dialog();
 }
 
 void Dialog::closeApp()

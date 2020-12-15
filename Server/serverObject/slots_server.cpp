@@ -1,12 +1,12 @@
 #include "server.h"
 
-//работаю с приходящим json файлом
+/*
 void Server::getJson(int socketDescriptor, Packet pack)
 {
     QString nameHost = pack.getHostName();
     QString nameCommand = pack.getNameCommand();
     QString textCommand = pack.getTextCommand();
-    QString command = pack.getJsonCommand();
+    QVariant command = pack.getCommand();
 
     QJsonDocument doc = QJsonDocument::fromJson(command.toUtf8());
     //массив команд и получателей
@@ -62,7 +62,7 @@ void Server::getJson(int socketDescriptor, Packet pack)
     QJsonDocument arr;
     arr.setArray(arrCommands);
     QString arrStr = arr.toJson();
-    pack.setJsonCommand(arrStr);
+    pack.setCommand(arrStr);
 
     if(!all.isNull())
     {
@@ -93,10 +93,11 @@ void Server::getJson(int socketDescriptor, Packet pack)
     }
 
 }
-
+*/
 //проверяю есть ли хост в карте hosts
 void Server::slot_sendData(int socket, Packet pack)
 {
+    qDebug() << "slot_send_data";
     QString nameHost = pack.getHostName();
     QString nameCommand = pack.getNameCommand();
     QString textCommand = pack.getTextCommand();
@@ -105,20 +106,33 @@ void Server::slot_sendData(int socket, Packet pack)
     {
         getHostInfo(nameHost, socket);
     }
+
         emit setRowTable(nameHost, tr("%1 %2")
                                         .arg(nameCommand)
                                         .arg(textCommand));
 
 }
 
-void Server::slot_send_file(QString file)
+//получаю при отправки файла, путь + дескриптор сокета
+void Server::slot_send_file(QString file, int sock)
 {
+
+
+    //читаю скрипт
+    QFile fileScript(file);
+    if(!fileScript.open(QIODevice::ReadOnly))
+        return;
+
+    QTextStream in(&fileScript);
+
+    QString text = in.readAll();
+
     QDateTime date = QDateTime::currentDateTime();
-    QString send = "Send";
-    QString text = "Send file";
     pack->setDateAndTime(date);
-    pack->setNameCommand(send);
-    pack->setTextCommand(text);
+    //парсер скрипта
+    parseJsonCommand(text, sock);
+
+    fileScript.close();
 
 }
 //журналирую данные в файл
@@ -132,13 +146,13 @@ void Server::slot_logger(Packet pack)
         QTextStream loggerStream(&log);
         loggerStream.setCodec(QTextCodec::codecForName("UTF-8"));
 
-        if(pack.getJsonCommand().isNull())
+        if(pack.getCommand().isNull())
         {
             loggerStream << pack.getDateAndTime().toString() << " host: " << pack.getNameCommand() << " ----- " << pack.getNameCommand() << " - "
             << pack.getTextCommand() << "\n";
         }else{
             loggerStream << pack.getDateAndTime().toString() << " host: " << pack.getNameCommand() << " ----- " << pack.getNameCommand() << " - "
-            << pack.getTextCommand() << " command: " << pack.getJsonCommand() << "\n";
+            << pack.getTextCommand() << " command: " << "" << "\n";
         }
 
         log.close();

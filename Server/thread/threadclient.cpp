@@ -58,15 +58,8 @@ ThreadClient::ThreadClient(int socketDescriptor,QObject* parent)
 //проверяю данные которые пришли от клиентов и записываю их в таблицу
 void ThreadClient::checkNameAndSendSignal(Packet pack)
 {
-    if(pack.getNameCommand() == "json")
-    {
-        emit sendData(socketDescriptor,pack); //устанавливаю в таблицу новый лог
-        emit sendJsonFromThread(socketDescriptor,pack); //отправляю пакет в котором json
-        return;
-
-    }
+    qDebug() << "checkNameAndSendSignal " << pack.getNameCommand();
     emit sendData(socketDescriptor,pack);
-
 }
 
 

@@ -52,6 +52,9 @@
     </item>
     <item>
      <widget class="QPushButton" name="send_file_btn">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="text">
        <string>Отправить файлы</string>
       </property>

@@ -9,11 +9,13 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dialogMain/connects.cpp \
     dialogMain/getHost.cpp \
     dialogMain/dialog.cpp \
     dialogMain/handlerErrorDialog.cpp \
     dialogMain/slots_dialog.cpp \
     main.cpp \
+    nextForm/send/slots_send.cpp \
     serverObject/connections.cpp \
     serverObject/errorHandler.cpp \
     serverObject/sendData.cpp \

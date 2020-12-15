@@ -32,6 +32,7 @@ Server::Server(Ui::Dialog *ui, QObject* parent)
 //подключения
 void Server::incomingConnection(qintptr socketDescriptor)
 {
+
     //объекта клиента перемещаю в отдельный поток и дескриптор
     ThreadClient* cl = new ThreadClient(socketDescriptor);
 
@@ -43,8 +44,43 @@ void Server::incomingConnection(qintptr socketDescriptor)
 
     thread->start();
 }
+//парсер скрипта принимает текст файла и дескриптор
+void Server::parseJsonCommand(QString text, int sock)
+{
+    qDebug() << "parse";
+    QJsonDocument doc = QJsonDocument::fromJson(text.toUtf8());
+    qDebug() << doc;
+    //массив объектов json
+    QJsonArray arr = doc.array();
+
+    QJsonObject obj;
+    QString key;
+    QString value;
+    for(int i = 0; i<arr.size(); ++i)
+    {
+
+        obj = arr[i].toObject();
+        key = obj.keys()[0];
+        qDebug() << key;
+        pack->setNameCommand(key);
+        if(key == "write_to_file")
+        {
+                QString from;
+                QString to;
+                QJsonObject o_c = obj.value(key).toObject();
+                from = o_c.value("from").toString();
+                to = o_c.value("to").toString();
+                pack->setPath(to);
+                pack->setTextCommand(from);
+        }else{
+            value = obj.value(key).toString();
+            pack->setTextCommand(value);
+        }
 
 
+        SendDataPack(*pack, sock);
+    }
+}
 //добавляю новый хост в карту
 void Server::getHostInfo(QString name, int desc)
 {

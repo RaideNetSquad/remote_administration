@@ -16,17 +16,16 @@ void ClientWindow::create_file(QString &path)
     MessageInfo("Клиент", "Создал файл " + path);
 }
 
-void ClientWindow::write_to_file(QString &text, QString &path)
+void ClientWindow::write_to_file(QVariant &text, QString &path)
 {
     qDebug() << path;
     QFile file(path);
-    file.open(QIODevice::Append);
-    QTextStream in(&file);
-    in.setCodec(QTextCodec::codecForName("UTF-8"));
-    in << text << "\n";
+    file.open(QIODevice::WriteOnly);
+    QDataStream in(&file);
+    in << text;
     file.close();
 
-    emit complete_signal("Записал в файл", path + " текст " + text);
+    emit complete_signal("Записываю файл", "status");
     MessageInfo("Клиент", "Записал в файл " + path);
 }
 
