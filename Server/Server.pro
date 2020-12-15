@@ -9,28 +9,34 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    dialog.cpp \
+    dialogMain/getHost.cpp \
+    dialogMain/dialog.cpp \
+    dialogMain/handlerErrorDialog.cpp \
+    dialogMain/slots_dialog.cpp \
     main.cpp \
-    serverObject/ModelTable.cpp \
     serverObject/connections.cpp \
     serverObject/errorHandler.cpp \
     serverObject/sendData.cpp \
     serverObject/server.cpp \
-    getHost.cpp \
     serverObject/slots_server.cpp \
-    serverObject/tableWork.cpp \
     thread/slots_thread.cpp \
-    thread/threadclient.cpp
+    thread/threadclient.cpp \
+    nextForm/send/send.cpp \
+    nextForm/status/status.cpp \
+    nextForm/status/table/tableWork.cpp\
+    nextForm/status/table/ModelTable.cpp
 
 HEADERS += \
     Pack.h \
-    modelTable.h \
     ui_dialog.h\
-    dialog.h \
+    dialogMain/dialog.h \
     server.h \
     serverObject/server.h \
     thread/threadclient.h \
-    threadclient.h
+    threadclient.h \
+    nextForm/send/send.h \
+    nextForm/status/status.h \
+    nextForm/status/table/modelTable.h \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -38,8 +44,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 FORMS += \
-    dialog.ui
+    ui/dialog.ui \
+    ui/sendFile.ui \
+    ui/status.ui
 
-RESOURCES += \
-    logger.qrc
+
 

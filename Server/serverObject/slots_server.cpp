@@ -101,21 +101,26 @@ void Server::slot_sendData(int socket, Packet pack)
     QString nameCommand = pack.getNameCommand();
     QString textCommand = pack.getTextCommand();
 
-    if(!hosts.contains(nameHost) && nameCommand != "json" && nameCommand != "jsonSender")
+    if(!hosts.contains(nameHost))
     {
         getHostInfo(nameHost, socket);
     }
-    if(nameCommand == "json" || nameCommand == "jsonsender"){
-        setRowTable("jsonsender " + nameHost, textCommand);
-    }else{
-        setRowTable(nameHost, tr("%1 %2")
+        emit setRowTable(nameHost, tr("%1 %2")
                                         .arg(nameCommand)
                                         .arg(textCommand));
-    }
 
 }
 
+void Server::slot_send_file(QString file)
+{
+    QDateTime date = QDateTime::currentDateTime();
+    QString send = "Send";
+    QString text = "Send file";
+    pack->setDateAndTime(date);
+    pack->setNameCommand(send);
+    pack->setTextCommand(text);
 
+}
 //журналирую данные в файл
 void Server::slot_logger(Packet pack)
 {
@@ -140,4 +145,10 @@ void Server::slot_logger(Packet pack)
     }
 
     mutex.unlock();
+}
+
+void Server::new_client_set_item_to_server(QString name, int sock)
+{
+    qDebug() << "new_client_set_item_to_server";
+    emit new_client_to_sendForm(name, sock);
 }

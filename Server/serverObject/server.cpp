@@ -21,12 +21,11 @@
 
 
 Server::Server(Ui::Dialog *ui, QObject* parent)
-    : QTcpServer(parent), pack(new Packet(QHostInfo::localHostName())), tableModel(new ModelTable(this))
+    : QTcpServer(parent), pack(new Packet(QHostInfo::localHostName()))
 {
     //сигнало слотовые соединения в качестве аргумента передают тип Пакета
     qRegisterMetaType<Packet>("Packet");
-    //установка таблицы
-    setTable(ui);
+    qDebug() << "Server start";
 }
 
 

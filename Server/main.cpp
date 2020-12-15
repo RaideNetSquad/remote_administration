@@ -2,7 +2,7 @@
     * Приложение сервера
 */
 
-#include "dialog.h"
+#include "dialogMain/dialog.h"
 #include <QtCore>
 
 #include <stdlib.h>

@@ -11,7 +11,7 @@ void Server::errorFoundHost(Packet pack, int socketDescriptor)
     pack.setDateAndTime(time);
     pack.setNameCommand(name);
     pack.setTextCommand(mesError);
-    setRowTable(pack.getHostName(), mesError);
+    //setRowTable(pack.getHostName(), mesError);
     //QMap<QString, int> map;
     //map[pack.getHostName()] = socketDescriptor;
     //QMap<QString, int>::Iterator currentIt = map.begin();

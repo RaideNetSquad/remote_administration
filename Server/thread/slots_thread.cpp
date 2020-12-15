@@ -3,6 +3,7 @@
 //читаю данные от сокета
 void ThreadClient::slot_read()
 {
+
     QDataStream in;
     in.setDevice(newUser);
     in.setVersion(QDataStream::Qt_4_0);
@@ -30,6 +31,7 @@ void ThreadClient::slot_read()
         emit logger(pack);
     }
 
+    emit new_client_set_item_from_thread(pack.getHostName(),socketDescriptor);
 
 }
 //разрыв соединения

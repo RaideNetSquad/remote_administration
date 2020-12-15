@@ -15,7 +15,6 @@ void Server::connects(ThreadClient* cl, QThread* thread)
     /*connect(cl, SIGNAL(sendHostNameAndDescriptor(QString, int)),
             this, SLOT(getHostInfo(QString, int)),
             Qt::QueuedConnection);*/
-
     connect(cl, SIGNAL(sendData(int,Packet)),
             this, SLOT(slot_sendData(int,Packet ))
             );
@@ -26,4 +25,6 @@ void Server::connects(ThreadClient* cl, QThread* thread)
     connect(this, SIGNAL(logger(Packet)),
             this, SLOT(slot_logger(Packet))
             );
+    connect(cl, SIGNAL(new_client_set_item_from_thread(QString,int)),
+            this, SLOT(new_client_set_item_to_server(QString, int)));
 }

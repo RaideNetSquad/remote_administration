@@ -25,6 +25,7 @@ private:
     void dataSender();
     void checkNameAndSendSignal(Packet pack);
 signals:
+    void new_client_set_item_from_thread(QString, int);
     void connect_finished_signal(int);
     void logger(Packet pack);
     void notFoundHost(QString, QString);
