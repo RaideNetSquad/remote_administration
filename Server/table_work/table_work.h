@@ -17,7 +17,6 @@ class Table_Work : public QObject
 public:
     Table_Work();
     explicit Table_Work(Ui::Dialog *ui,
-                        QMutex *m,
                         QVector<HostsCommand> *commandHost,
                         QObject* parent = 0);
 private:

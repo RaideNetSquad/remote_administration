@@ -25,16 +25,17 @@ void FormJsonSend::on_send_clicked()
     QFile json(fileJSON);
 
     if(json.open(QIODevice::ReadOnly)){
-        QDateTime dateAndTime = QDateTime::currentDateTime();
+        //QDateTime dateAndTime = QDateTime::currentDateTime();
         QString nameCommand = "json";
         QString textCommand = "send JSON";
         QString readJSON = json.readAll();
 
-        pack->setDateAndTime(dateAndTime);
-        pack->setNameCommand(nameCommand);
-        pack->setTextCommand(textCommand);
-        pack->setJsonCommand(readJSON);
-        emit sendData_from_packJson(pack);
+        //pack->setDateAndTime(dateAndTime);
+        //pack->setNameCommand(nameCommand);
+        //pack->setTextCommand(textCommand);
+        //pack->setJsonCommand(readJSON);
+
+        //emit sendData_from_packJson(pack);
     }else{
         emit errorOpen("Error", "Не могу открыть файл");
     }

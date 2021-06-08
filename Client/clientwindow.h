@@ -4,8 +4,9 @@
 #include <QWidget>
 #include <QTcpSocket>
 #include <QDateTime>
-#include "Pack.h"
+#include "Provider_Network_Data.h"
 #include <QMutex>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class ClientWindow; }
 QT_END_NAMESPACE
@@ -18,16 +19,17 @@ public:
     ~ClientWindow();
 public:
     QMutex mutex;
-    Packet *pack;
+    Provider_Network_Data *provider_net;
 
 private:
+    Datagram datagram;
+
     QTcpSocket* connectToServ;
     void dataSender();
     void Connections();
     void MessageInfo(QString name, QString info);
-    void check_Command_From_Client();
-    void send_Name();
-private:
+
+/*private:
     void parser_Commands(QString &command);
     void complete_Commands(QString &command, QVariant value);
     void create_file(QString &path);
@@ -35,7 +37,7 @@ private:
     void delete_file(QString &path);
     void write_to_file(QString &text, QString &path);
     void copy_file(QString&, QString&);
-    void complite_file(QString&);
+    void complite_file(QString&);*/
 private slots:
     void on_pushButton_clicked();
 

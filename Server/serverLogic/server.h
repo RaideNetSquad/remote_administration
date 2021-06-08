@@ -11,6 +11,7 @@
 #include "table_work/modelTable.h"
 #include "thread/threadclient.h"
 #include "table_work/table_work.h"
+#include "qmap/clients_map_object.h"
 
 class Server : public QTcpServer
 {
@@ -24,6 +25,8 @@ private:
 
     //вектор сохраняет значения ячеек таблицы
     QVector<HostsCommand> *commandHost;
+
+    Clients_Map_Object *cl_Map_Obj;
 
     quint64 countRow;
     QMap<QString, int> hosts;
@@ -41,13 +44,22 @@ public:
 private:
     void connects(ThreadClient* cl, QThread* thread);
 signals:
-    void logger(Packet pack);
+    void logger(const QDateTime&,
+                const QString&,
+                const QString&);
 private slots:
+    void slot_get_name_and_socket_to_qmap(const QString&, const int&);
+
+    void slot_sendData_toTable(const QString&, const QString&);
+
     void finish_connect_slot(int);
-    void slot_logger(Packet pack);
+
+    void slot_logger(const QDateTime&,
+                           const QString&,
+                           const QString&);
+
     //void notFoundHost(QString, QString);
     void getJson(int socketDescriptor, Packet pack);
-    void slot_sendData(int, Packet);
 };
 
 

@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Provider/Provider_Network_Data.cpp \
     dialog/dialog.cpp \
     dialog/getHost.cpp \
     table_work/ModelTable.cpp \
@@ -25,7 +26,7 @@ SOURCES += \
     main.cpp \
 
 HEADERS += \
-    serverLogic/Pack.h \
+    Provider/Provider_Network_Data.h \
     serverLogic/server.h \
     table_work/modelTable.h \
     table_work/table_work.h \

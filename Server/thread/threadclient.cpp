@@ -29,7 +29,7 @@ ThreadClient::ThreadClient(int socketDescriptor,QObject* parent)
     //создаю объект сокета клиента
     newUser = new QTcpSocket;
 
-    pack.setHostId(SERVER_ID);
+    pack.setClientId(socketDescriptor);
 
     //устанавливаю уникальный ключ для сокета клиента
     if (!newUser->setSocketDescriptor(socketDescriptor)) {
@@ -40,20 +40,16 @@ ThreadClient::ThreadClient(int socketDescriptor,QObject* parent)
 
     connects();
 
-    //TO DO uniq sock desc to serv
-    //send_SockDesc(socketDescriptor, pack);
     to_Ask_Name();
 }
 
 bool ThreadClient::to_Ask_Name()
 {
+
     pack.setIdCommand(TO_ASK_NAME);
     send_Short_Data();
 };
-bool ThreadClient::send_SockDesc(int desc)
-{
 
-}
 bool ThreadClient::send_Short_Data()
 {
     //отправляю короткую команду
@@ -82,7 +78,7 @@ bool ThreadClient::send_Short_Data()
     newUser->write(arr);
 }*/
 //проверяю данные которые пришли от клиентов и записываю их в таблицу
-void ThreadClient::checkNameAndSendSignal(Packet pack)
+/*void ThreadClient::checkNameAndSendSignal(Packet pack)
 {
     /*if(pack.getNameCommand() == "json")
     {
@@ -91,11 +87,42 @@ void ThreadClient::checkNameAndSendSignal(Packet pack)
         return;
 
     }
-    emit sendData(socketDescriptor,pack);*/
+    emit sendData(socketDescriptor,pack);
 
 }
+*/
+void ThreadClient::full_Message(QDateTime t, QString m, QString tM)
+{
+    this->dateTime = t;
+    this->nameMessage = m;
+    this->textMessage = tM;
+};
 
+void ThreadClient::controller_network_command()
+{
+    QString nameHostClient = pack.get_ByteData();
 
+    QDateTime dateTime = QDateTime::currentDateTime();
+
+    //обработчик команды получения имени
+    if(pack.getIdCommand() == GET_NAME)
+    {
+        QString name = pack.get_ByteData();
+        QString data = "Подключение клиента ";
+
+        full_Message(dateTime, data, name);
+
+        emit sendData_toTable(name, data);
+
+        emit logger(this->dateTime,
+                    this->nameMessage,
+                    this->textMessage);
+        //сигнал записи имени и уникального ид в словарь клиентов
+        emit send_name_and_socket_to_qmap(nameHostClient, socketDescriptor);
+
+        emit got_Name_Client();
+    }
+};
 
 ThreadClient::~ThreadClient()
 {

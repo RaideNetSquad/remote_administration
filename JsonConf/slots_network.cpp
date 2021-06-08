@@ -9,21 +9,13 @@
 
 void infoBox(QString, QString);
 
-void Network::sendData(Packet *pack)
+
+void Network::slotNewConnected()
 {
-    QByteArray arr;
 
-    QDataStream in(&arr,QIODevice::WriteOnly);
-    in.setVersion(QDataStream::Qt_4_0);
-
-    QDateTime time = QDateTime::currentDateTime();
-    pack->setDateAndTime(time);
-
-    in << *pack;
-
-    connectToServ->write(arr);
-    connectToServ->waitForBytesWritten();
-}
+    //dataSender();
+    MessageInfo("Клиент", "Я подключился к серверу!");
+};
 
 //считываю данные приходящие к хосту
 void Network::slot_read()
@@ -32,23 +24,16 @@ void Network::slot_read()
     in.setDevice(connectToServ);
     in.setVersion(QDataStream::Qt_4_0);
 
-    while(connectToServ->bytesAvailable())
-    {
-        in.startTransaction();
+    in.startTransaction();
 
-        Packet pack;
-        in >> pack;
+    in >> datagram;
 
-        if(pack.getNameCommand() == "Error")
-        {
-            infoBox(pack.getNameCommand(), pack.getTextCommand());
-        }
-        qDebug() << pack.getDateAndTime() << pack.getHostName();
+    if (!in.commitTransaction())
+          return;
 
-        if (!in.commitTransaction())
-              return;
-    }
+    provider_net->check_NetCommand_From_Server(connectToServ, &datagram);
 }
+
 
 void Network::slotCloseUi()
 {

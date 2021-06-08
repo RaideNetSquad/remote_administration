@@ -88,8 +88,9 @@ void Server::getJson(int socketDescriptor, Packet pack)
 }
 
 //проверяю есть ли хост в карте hosts
-void Server::slot_sendData(int socket, Packet pack)
+void Server::slot_sendData_toTable(const QString& name, const QString& text)
 {
+    table->setRowTable(name, tr("%1").arg(text));
     /*
     QString nameHost = pack.getHostName();
     QString nameCommand = pack.getNameCommand();
@@ -111,17 +112,16 @@ void Server::slot_sendData(int socket, Packet pack)
 
 
 //журналирую данные в файл
-void Server::slot_logger(Packet pack)
-{   /*
-    mutex->lock();
+void Server::slot_logger(const QDateTime& dateTime, const QString& nameMes, const QString& textMes)
+{
     QFile log;
     log.setFileName("logger.txt");
     if(log.open(QIODevice::Append)){
 
         QTextStream loggerStream(&log);
         loggerStream.setCodec(QTextCodec::codecForName("UTF-8"));
-
-        if(pack.getJsonCommand().isNull())
+        /*
+        if(dateTime.isNull())
         {
             loggerStream << pack.getDateAndTime().toString() << " host: " << pack.getNameCommand() << " ----- " << pack.getNameCommand() << " - "
             << pack.getTextCommand() << "\n";
@@ -129,10 +129,14 @@ void Server::slot_logger(Packet pack)
             loggerStream << pack.getDateAndTime().toString() << " host: " << pack.getNameCommand() << " ----- " << pack.getNameCommand() << " - "
             << pack.getTextCommand() << " command: " << pack.getJsonCommand() << "\n";
         }
-
+        */
+        loggerStream << dateTime.toString() << nameMes << " ----- " << textMes << "\n";
         log.close();
     }
-
-    mutex->unlock();
-    */
 }
+
+void Server::slot_get_name_and_socket_to_qmap(const QString& hostName, const int &socketDesc)
+{
+    //добавить в словарь клиентов
+    cl_Map_Obj->add_client(hostName, socketDesc);
+};

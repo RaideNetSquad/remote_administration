@@ -4,6 +4,9 @@
 
 void Network::signal_slot_Connections()
 {
+
+    connect(connectToServ, SIGNAL(connected()),
+            this, SLOT(slotNewConnected()));
     connect(connectToServ, SIGNAL(readyRead()),
             this, SLOT(slot_read()));
 };

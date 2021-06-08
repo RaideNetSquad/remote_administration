@@ -21,7 +21,10 @@
 
 
 Server::Server(Ui::Dialog *ui, QObject* parent)
-    : QTcpServer(parent), pack(new Packet(NULL_ID)), table(new Table_Work(ui, mutex, commandHost))
+    : QTcpServer(parent),
+      pack(new Packet()),
+      table(new Table_Work(ui, commandHost)),
+      cl_Map_Obj(new Clients_Map_Object())
 {
     //сигнало слотовые соединения в качестве аргумента передают тип Пакета
     qRegisterMetaType<Packet>("Packet");

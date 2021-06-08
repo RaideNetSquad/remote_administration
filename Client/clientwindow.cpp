@@ -18,7 +18,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QFileDialog>
-#include "Pack.h"
+#include "Provider_Network_Data.h"
 void ClientWindow::MessageInfo(QString name, QString info)
 {
     QMessageBox* message = new QMessageBox();
@@ -32,7 +32,7 @@ void ClientWindow::MessageInfo(QString name, QString info)
 ClientWindow::ClientWindow(QWidget *parent) : QWidget(parent)
     , ui(new Ui::ClientWindow)
     , connectToServ(new QTcpSocket(this))
-    , pack(new Packet())
+    , provider_net(new Provider_Network_Data())
 {
     Connections();
     ui->setupUi(this);
@@ -46,7 +46,7 @@ void ClientWindow::on_pushButton_clicked()
 
 }
 //парсинг команд
-void ClientWindow::parser_Commands(QString &command)
+/*void ClientWindow::parser_Commands(QString &command)
 {
     QJsonDocument jsonDoc = QJsonDocument::fromJson(command.toUtf8());
     if(jsonDoc.isArray())
@@ -131,43 +131,8 @@ void ClientWindow::complete_Commands(QString &command, QVariant value)
         complite_file(val);
     }
 }
+*/
 
-void ClientWindow::check_Command_From_Client(){
-    //маршрутизатор команд
-
-    const int command_id = pack->getIdCommand();
-
-    if(command_id == TO_ASK_NAME)
-    {
-        qDebug() << "Ask";
-        this->send_Name();
-    };
-};
-
-void ClientWindow::send_Name()
-{
-    //отправить имя хоста серверу
-    pack->setIdCommand(SEND_NAME);
-
-    QString localName = QHostInfo::localHostName();
-    pack->setDataByArray(localName);
-    qDebug() << pack->getIdCommand() << " id c";
-    qDebug() << pack->get_ByteData() << " byte arr";
-    this->dataSender();
-}
-void ClientWindow::dataSender()
-{
-    QByteArray arr;
-    QDataStream out(&arr, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_0);
-
-    qDebug() << pack->getIdCommand();
-
-    out << *pack;
-
-    connectToServ->write(arr);
-    connectToServ->waitForBytesWritten();
-}
 
 ClientWindow::~ClientWindow()
 {

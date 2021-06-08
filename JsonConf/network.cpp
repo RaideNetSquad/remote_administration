@@ -20,7 +20,7 @@ void infoBox(QString, QString);
 
 Network::Network(QWidget *parent) : QWidget(parent),
       connectToServ(new QTcpSocket(this)),
-      pack(new Packet(QHostInfo::localHostName())),
+      provider_net(new Provider_Network_Data()),
       ui(new Ui::network)
 {
     ui->setupUi(this);
@@ -41,14 +41,16 @@ bool Network::connecting()
     return true;
 }
 
-/*void Network::slot_NewConnected()
+
+void Network::MessageInfo(QString name, QString info)
 {
-    infoBox("Подключение", "Есть подключение к серверу!");
-    pack.dateAndTime = QDateTime::currentDateTime();
-    pack.nameCommand = "Подключился";
-    pack.textCommand = "Запрос на подключение от хоста успешно выполнился";
-    sendData();
-}*/
+    QMessageBox* message = new QMessageBox();
+    message->setText(name);
+    message->setInformativeText(info);
+    message->setIcon(QMessageBox::Information);
+    message->setDefaultButton(QMessageBox::Ok);
+    message->open();
+}
 void Network::on_send_clicked()
 {
     port = ui->port->text().toInt();

@@ -22,19 +22,19 @@ class Clients_Map_Object : public QObject
 public:
     Clients_Map_Object(QObject* parent = nullptr);
 private:
-    QMap<QString, quint16> clients_map;
+    QMap<QString, int> clients_map;
 
 public:
     void clear_map();
-    void add_client(QString&, quint16&);
+    void add_client(const QString&, const int&);
 
-    void delete_client_with_id(quint16&);
+    void delete_client_with_id(int&);
     void delete_client_with_name(QString&);
 
-    quint16 get_client_id(QString&);
-    QString get_client_name(quint16&);
+    int get_client_id(QString&);
+    QString get_client_name(int&);
 
-    quint16 get_id();
+    int get_id();
 
 };
 

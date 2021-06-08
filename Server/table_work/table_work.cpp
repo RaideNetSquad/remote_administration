@@ -1,7 +1,7 @@
 #include "table_work.h"
 
-Table_Work::Table_Work(Ui::Dialog *ui,QMutex *m, QVector<HostsCommand> *commandHost, QObject *parent): QObject(parent) ,
-    tableModel(new ModelTable(this)), mutex(m)
+Table_Work::Table_Work(Ui::Dialog *ui,QVector<HostsCommand> *commandHost, QObject *parent): QObject(parent) ,
+    tableModel(new ModelTable(this))
 {
     //установка таблицы
     setTable(ui);
@@ -44,7 +44,6 @@ void Table_Work::setTable(Ui::Dialog *ui){
 void Table_Work::setRowTable(QString name, QVariant command)
 {
     //отсутствие одновременного доступа к потоку
-    mutex->lock();
     if(name.isNull() || name.isEmpty())
         return;
 
@@ -58,5 +57,4 @@ void Table_Work::setRowTable(QString name, QVariant command)
 
     tableModel->setRow(commandHost);
     clientStatus->setModel(tableModel);
-    mutex->unlock();
 }

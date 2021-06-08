@@ -4,6 +4,10 @@
 //сигнало-слотовое соединение
 void Server::connects(ThreadClient* cl, QThread* thread)
 {
+    //для передачи имени хоста и его ид в мар
+    //connect(cl, SIGNAL(send_name_and_socket_to_qmap(QString&, int&)),
+            //this, SLOT(slot_get_name_and_socket_to_qmap(QString&, int&)));
+
     connect(cl, SIGNAL(connect_finished_signal(int)),
             this, SLOT(finish_connect_slot(int)));
     connect(thread, &QThread::finished,
@@ -16,14 +20,23 @@ void Server::connects(ThreadClient* cl, QThread* thread)
             this, SLOT(getHostInfo(QString, int)),
             Qt::QueuedConnection);*/
 
-    connect(cl, SIGNAL(sendData(int,Packet)),
-            this, SLOT(slot_sendData(int,Packet ))
+    connect(cl, SIGNAL(sendData_toTable(const QString&, const QString&)),
+            this, SLOT(slot_sendData_toTable(const QString&, const QString&))
             );
 
-    connect(cl, SIGNAL(logger(Packet)),
-            this, SLOT(slot_logger(Packet))
+    connect(cl, SIGNAL(logger(const QDateTime&,
+                              const QString&,
+                              const QString&)),
+            this, SLOT(slot_logger(const QDateTime&,
+                                   const QString&,
+                                   const QString&))
             );
-    connect(this, SIGNAL(logger(Packet)),
-            this, SLOT(slot_logger(Packet))
+
+    connect(this, SIGNAL(logger(const QDateTime&,
+                                const QString&,
+                                const QString&)),
+            this, SLOT(slot_logger(const QDateTime&,
+                                   const QString&,
+                                   const QString&))
             );
 }

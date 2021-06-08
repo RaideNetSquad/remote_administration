@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Provider_Network_Data.cpp \
     commandsJsonRealization.cpp \
     connections.cpp \
     main.cpp \
@@ -16,7 +17,7 @@ SOURCES += \
     slots.cpp
 
 HEADERS += \
-    Pack.h \
+    Provider_Network_Data.h \
     clientwindow.h
 
 FORMS += \

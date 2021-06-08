@@ -2,7 +2,7 @@
 #define CONFJSON_H
 
 #include "network.h"
-#include "Pack.h"
+#include "Provider_Network_Data.h"
 
 #include <QWidget>
 #include <QJsonDocument>
@@ -25,14 +25,14 @@ public slots:
 
     void on_send_clicked();
 private:
-    Packet *pack;
+    Provider_Network_Data *provider_net;
     QString fileJSON;
     Ui::FormJsonSend *ui;
     void infoBox(QString textInfo, QString head);
     void signal_slot_Connections();
 
 signals:
-    void sendData_from_packJson(Packet *pack);
+    void sendData_from_packJson(Provider_Network_Data *pack);
     void errorOpen(QString, QString);
 };
 

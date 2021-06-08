@@ -13,7 +13,7 @@ void ClientWindow::slotNewConnected()
     //pack->setNameCommand(nameCommand);
     //pack->setTextCommand(textCommand);
 
-    dataSender();
+    //dataSender();
     MessageInfo("Клиент", "Я подключился к серверу!");
 }
 
@@ -25,13 +25,13 @@ void ClientWindow::slotRead()
 
     in.startTransaction();
 
-    in >> *pack;
+    in >> datagram;
 
     if (!in.commitTransaction())
           return;
-    check_Command_From_Client();
-    //QString json =pack.getJsonCommand();
-    //parser_Commands(json);
+
+    provider_net->check_NetCommand_From_Server(connectToServ, &datagram);
+
 }
 
 void ClientWindow::slot_send_command(QString nameCommand, QString textCommand){

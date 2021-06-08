@@ -6,26 +6,31 @@ void ThreadClient::slot_read()
     QDataStream in;
     in.setDevice(newUser);
     in.setVersion(QDataStream::Qt_4_0);
-
     while(newUser->bytesAvailable())
     {
         in.startTransaction();
-
-        Packet pack;
         in >> pack;
-        qDebug() << pack.getIdCommand() << pack.get_ByteData();
 
         if (!in.commitTransaction())
-              return;
-
+        {
+            //если есть ошибки при чтении байт
+            return;
+        }
         //проверка комманд
         //checkNameAndSendSignal(pack);
         //логгирование
-        //emit logger(pack);
     }
+    qDebug() << pack.getIdCommand() << pack.get_ByteData();
 
+    //маршрутизатор команд
+    controller_network_command();
 
 }
+//после получения имени клиента, отправить ему его идентификатор
+void ThreadClient::slot_Got_Name_Client()
+{
+
+};
 //разрыв соединения
 void ThreadClient::slot_disconnectHost()
 {

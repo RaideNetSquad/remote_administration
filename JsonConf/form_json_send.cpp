@@ -17,7 +17,7 @@ void infoBox (QString, QString);
 FormJsonSend::FormJsonSend(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormJsonSend),
-    pack(new Packet(QHostInfo::localHostName()))
+    provider_net(new Provider_Network_Data())
 {
     ui->setupUi(this);
 }

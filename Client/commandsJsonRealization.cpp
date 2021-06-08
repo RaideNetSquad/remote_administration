@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QProcess>
 
+/*
 //Команды, которые может выполнить удаленно комп
 void ClientWindow::create_file(QString &path)
 {
@@ -28,11 +29,12 @@ void ClientWindow::write_to_file(QString &text, QString &path)
 
     emit complete_signal("Записал в файл", path + " текст " + text);
     MessageInfo("Клиент", "Записал в файл " + path);
-}
+}*/
 
-void ClientWindow::open_file(QString &path)
+/*void ClientWindow::open_file(QString &path)
 {
-    QString f = QFileDialog::getOpenFileName(this, tr("Open File"),path, path.remove(QRegExp(".*/")));
+exp .*/ /*
+    QString f = QFileDialog::getOpenFileName(this, tr("Open File"),path, path.remove(QRegExp()));
     QFile file(f);
     emit complete_signal("Открываю файл", path);
     MessageInfo("Клиент", "Открыл файл " + path);
@@ -66,3 +68,4 @@ void ClientWindow::complite_file(QString &path)
     MessageInfo("Выполнил программу", path);
     emit complete_signal("Выполнил программу", path);
 }
+*/
