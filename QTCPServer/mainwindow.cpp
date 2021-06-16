@@ -47,8 +47,8 @@ void MainWindow::set_Time_Complite_Instructions()
     */
 
     //QFile f(QDir::currentPath() + "/json_inst/time_do.json");
-    //QString path_f = QFileDialog::getOpenFileName(0, "Выберите основной json файл (time_do.json)", "", "*.json");
-    QString path_f = "/home/netkiller/Desktop/QTcpSocket-master/build-QTCPServer-Desktop_Qt_5_15_0_GCC_64bit-Debug/json_inst/time_do.json";
+    QString path_f = QFileDialog::getOpenFileName(0, "Выберите файл содержащий таймер выполнения инструкций и ссылку на файл с инструкциями (time_do.json)", "", "*.json");
+    //QString path_f = "/home/netkiller/Desktop/QTcpSocket-master/build-QTCPServer-Desktop_Qt_5_15_0_GCC_64bit-Debug/json_inst/time_do.json";
     parser_TimeDo(path_f);
 };
 
