@@ -26,8 +26,8 @@ void MainWindow::set_Roles_To_Map()
 {
     qDebug() << "set_Roles_To_Map [2]";
     //TODO update file path !!!!!!!!!!!!!!!!!!!!!!!!
-    //QString filePath = QFileDialog::getOpenFileName(this, ("Выберите файл с ролями (rules.json)"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), ("File (*.json)"));
-    QString filePath = "/home/netkiller/Desktop/QTcpSocket-master/build-QTCPServer-Desktop_Qt_5_15_0_GCC_64bit-Debug/json_inst/rules.json";
+    QString filePath = QFileDialog::getOpenFileName(this, ("Выберите файл с ролями (rules.json)"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), ("File (*.json)"));
+    //QString filePath = "/home/netkiller/Desktop/QTcpSocket-master/build-QTCPServer-Desktop_Qt_5_15_0_GCC_64bit-Debug/json_inst/rules.json";
     //QFile rules_json(QDir::currentPath() + "/json_inst/rules.json");
     emit newMessage("Файл (rules.json) с ролями читается...");
     QJsonDocument jsonDocument = get_JsonDocument(filePath);
