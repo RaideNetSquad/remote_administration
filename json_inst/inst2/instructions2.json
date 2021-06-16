@@ -1,0 +1,16 @@
+{
+	"GET_FILE": {
+		"PATH_SERV": "./resource/get2/send/sample.txt",
+		"PATH_CLIENT": "./resource/2/big.txt"
+		},
+	"SEND_FILE": {
+		"PATH_CLIENT": "./resource/2/video.mp4",
+		"PATH_SERV": "./resource/get1/video_serv.mp4"
+		},
+	"COPY_FILE": {
+		"FROM": "./resource/2/big.txt",
+		"TO": "./resource/get2/big2.txt"
+		},
+	"REMOVE_FILE": "./resource/2/big2.txt",
+	"COMPLITE_SOFT": "./resource/get2/video_serv.mp4"
+}
