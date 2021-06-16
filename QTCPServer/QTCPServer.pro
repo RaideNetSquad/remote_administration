@@ -12,9 +12,13 @@ CONFIG += c++11
 
 
 SOURCES += \
+    job_WithFilesJson.cpp \
         main.cpp \
     mainwindow.cpp \
-    rule_map.cpp
+    parser_Instructions.cpp \
+    rule_map.cpp \
+    send_Data.cpp \
+    slots_window.cpp
 
 HEADERS += \
     mainwindow.h \

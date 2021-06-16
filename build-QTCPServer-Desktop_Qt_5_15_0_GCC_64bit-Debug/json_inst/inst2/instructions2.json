@@ -1,0 +1,22 @@
+{
+	"STATE": "",
+	"COMMANDS": [
+		{"GET_FILE": {
+			"PATH_SERV": "./resource/2/sample_for_copy.txt",
+			"PATH_CLIENT": "./resource/2/big.txt"
+			}
+		},
+		{"SEND_FILE": {
+			"PATH_CLIENT": "./resource/2/video.mp4",
+			"PATH_SERV": "./resource/get2/video_serv.mp4"
+			}
+		},
+		{"COPY_FILE": {
+			"FROM": "./resource/2/sample_for_copy.txt",
+			"TO": "./resource/get2/big2.txt"
+			}
+		},
+		{"REMOVE_FILE": "./resource/2/sample.txt"},
+		{"COMPLITE_SOFT": "./resource/2/video.mp4"}
+	]
+}

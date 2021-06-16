@@ -11,6 +11,17 @@ Rule_Map::Rule_Map(QObject* parent) : QObject(parent)
 {
 
 }
+QString Rule_Map::return_Rule_By_Id(const qintptr &id)
+{
+    for(auto it = rules.begin(); it != rules.end();)
+    {
+        if(it.value() == id)
+        {
+            return it.key();
+        }
+    }
+    return "";
+}
 int Rule_Map::get_Rule_Id(const QString& rule, const qintptr &id)
 {
     for (auto it = this->rules.begin(); it != this->rules.end();){
@@ -68,3 +79,13 @@ void Rule_Map::set_Map(const QJsonDocument &jsonDoc)
     }
 }
 
+int Rule_Map::get_Id_Rule(const QString& rule)
+{
+    for (auto it = this->rules.begin(); it != this->rules.end(); ++it){
+        if(rule == it.key())
+        {
+            return it.value();
+        }
+    }
+    return 0;
+}

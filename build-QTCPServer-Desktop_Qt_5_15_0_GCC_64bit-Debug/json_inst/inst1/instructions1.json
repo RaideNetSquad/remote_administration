@@ -1,0 +1,14 @@
+{
+	"STATE": "",
+	"COMMANDS": [
+		[
+			{"STATE": ""},
+			{"SEND_FILE": {
+				"PATH_SERV": "./resource/1/video5.mp4",
+				"PATH_CLIENT": "./resource/get1/demo.mp4"
+				}
+			}
+		]
+		
+	]
+}

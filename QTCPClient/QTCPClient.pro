@@ -22,7 +22,9 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        send_Data.cpp \
+        slots_MainWIndow.cpp
 
 HEADERS += \
         mainwindow.h
