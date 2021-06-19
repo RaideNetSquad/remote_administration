@@ -1,0 +1,21 @@
+{
+	"COMMANDS": [
+		{"SEND_FILE": {
+			"PATH_CLIENT": "/home/netkiller/Desktop/transmit/resource/Client/demo.mp4",
+			"PATH_SERV": "/home/netkiller/Desktop/transmit/resource/demka20.mp4"
+			}
+		},
+		{"COMPLITE_SOFT": "/home/netkiller/Downloads/LinuxOfflineInstaller.run"},
+		{"GET_FILE": {
+			"PATH_SERV": "/home/netkiller/Desktop/transmit/resource/demka.mp4",
+			"PATH_CLIENT": "/home/netkiller/Desktop/transmit/resource/Client/demka20.mp4"
+			}
+		},
+		{"COPY_FILE": {
+			"FROM": "/home/netkiller/Desktop/transmit/resource/Client/removeFile.cpp",
+			"TO": "/home/netkiller/Desktop/transmit/resource/Client/removeFile2.cpp"
+			}
+		},
+		{"REMOVE_FILE": "/home/netkiller/Desktop/transmit/resource/Client/removeFile.cpp"}
+	]
+}
