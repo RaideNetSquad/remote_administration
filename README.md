@@ -1,13 +1,11 @@
 # Software for managing the technological process of conducting communication sessions
 # ПО управления ходом технологического процесса проведения сеансов связи
 
-Client - Клиент
-Server - Сервер
+Client
+Server
 resource - The folder contains instructions for the Server operation and commands to be executed by the Client.
-(Папка содержит инструкции для работы Сервера и команды, которые нужно выполнить Клиенту.)
 
 * **resource/Server/rules.json** - The file contains the process roles and the socket descriptor of this role
-(Файл содержит роли процесса и дескриптор сокета этой роли)
 
 ```json
 {
@@ -17,8 +15,7 @@ resource - The folder contains instructions for the Server operation and command
 ```
 
 * **resource/Server/timer_do.json** - The file contains the execution time, and a link to the file, 
-which has its own instructions attached to each role. (Файл содержит время выполнения, и ссылку на файл, 
-в котором к каждой роли привязанны свои инструкции)
+which has its own instructions attached to each role.
 
 ```json
 {
@@ -26,8 +23,7 @@ which has its own instructions attached to each role. (Файл содержит
 }
 ```
 
-* **resource/Server/rules_files.json** - Файл содержит все роли и путь к каждой инструкции выполняему клиентом.
-(The file contains all the roles and the path to each instruction executed by the client).
+* **resource/Server/rules_files.json** - The file contains all the roles and the path to each instruction executed by the client.
 
 ```json
 [
@@ -37,7 +33,6 @@ which has its own instructions attached to each role. (Файл содержит
 ```
 
 * **resource/Client/inst1/inst*1.json** - The file contains the instructions that the client must execute.
-(Файл содержит инструкции которые должен выполнить клиент).
 
 ```json
 {
